@@ -22,22 +22,28 @@ import {
 	onAuthStateChanged,
 } from 'firebase/auth';
 
+import { getStorage, uploadBytes, uploadString } from 'firebase/storage';
+
 const firebaseConfig = {
-	apiKey: 'AIzaSyADNNYKc11zRxcxTupX1FhxBSUG0qVrGrU',
-	authDomain: 'snapshat-clone-gm.firebaseapp.com',
-	projectId: 'snapshat-clone-gm',
-	storageBucket: 'snapshat-clone-gm.appspot.com',
-	messagingSenderId: '327727920784',
-	appId: '1:327727920784:web:8dcf20fbf1d8c69bda0a15',
+	apiKey: 'AIzaSyBxe0eMF0Ac8Sk1_3F3T1Ri5YuNPeId0lM',
+	authDomain: 'thsnap-gm-ceb41.firebaseapp.com',
+	projectId: 'thsnap-gm-ceb41',
+	storageBucket: 'thsnap-gm-ceb41.appspot.com',
+	messagingSenderId: '859950524300',
+	appId: '1:859950524300:web:5773695828d68d4d7a58a9',
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
+// storage
+const storage = getStorage(app);
+
 export {
+	app,
 	db,
 	collection,
 	getDocs,
@@ -54,4 +60,7 @@ export {
 	signInWithPopup,
 	signOut,
 	onAuthStateChanged,
+	storage,
+	uploadBytes,
+	uploadString,
 };
