@@ -5,6 +5,7 @@ import {
 	collection,
 	getDocs,
 	addDoc,
+	updateDoc,
 	deleteDoc,
 	serverTimestamp,
 	doc,
@@ -63,4 +64,5 @@ export {
 	storage,
 	uploadBytes,
 	uploadString,
+	updateDoc,
 };
