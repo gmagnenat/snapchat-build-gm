@@ -13,10 +13,14 @@ function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
 	const navigate = useNavigate();
 
 	const open = () => {
-		const docRef = doc(db, 'posts', id);
-		updateDoc(docRef, {
-			read: true,
-		});
+		if (!read) {
+			const documentRef = doc(db, 'posts', id);
+			dispatch(selectImage(imageUrl));
+			updateDoc(documentRef, {
+				read: true,
+			});
+			navigate('/chats/view');
+		}
 	};
 	return (
 		<div onClick={open} className="chat">
@@ -24,7 +28,7 @@ function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
 			<div className="chat__info">
 				<h4>{username}</h4>
 				<p>
-					Tap to view -{' '}
+					{!read && 'Tap to view -'}{' '}
 					<ReactTimeago date={new Date(timestamp?.toDate()).toUTCString()} />
 				</p>
 			</div>
