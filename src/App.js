@@ -10,6 +10,7 @@ function App() {
 			<BrowserRouter>
 				<div className="app__body">
 					<Routes>
+						<Route exact path="/chats" element={<h1>Chats page</h1>} />
 						<Route path="/preview" element={<Preview />} />
 						<Route exact path="/" element={<WebcamCapture />} />
 					</Routes>

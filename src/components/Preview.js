@@ -55,8 +55,11 @@ function Preview() {
 				addDoc(collectionRef, {
 					imageUrl: url,
 					username: 'Gwen',
+					read: false,
+					// profilePic,
 					timestamp: serverTimestamp(),
 				});
+				navigate('/chats');
 			});
 		});
 	};
