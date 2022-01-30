@@ -2,14 +2,25 @@ import React from 'react';
 import './Login.css';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { login } from '../features/appSlice';
 import { auth, googleProvider, signInWithPopup } from '../firebase';
 
 function Login() {
 	const dispatch = useDispatch();
 	const signIn = () => {
-		signInWithPopup(auth, googleProvider).catch((error) =>
-			alert(error.message)
-		);
+		signInWithPopup(auth, googleProvider)
+			.then((userAuth) => {
+				dispatch(
+					login({
+						username: userAuth.user.displayName,
+						profilePic: userAuth.user.photoURL,
+						id: userAuth.user.uid,
+					})
+				);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 	return (
 		<div className="login">

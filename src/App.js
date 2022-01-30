@@ -5,7 +5,7 @@ import Preview from './components/Preview';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Chats from './components/Chats';
 import ChatView from './components/ChatView';
-import { selectUser, login } from './features/appSlice';
+import { selectUser, login, logout } from './features/appSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Login from './components/Login';
 import { onAuthStateChanged, auth } from './firebase';
@@ -22,11 +22,11 @@ function App() {
 					login({
 						displayName: user.displayName,
 						email: user.email,
-						photoUrl: user.photoURL,
+						profilePic: user.photoURL,
 					})
 				);
 			} else {
-				// user is signed out
+				dispatch(logout());
 			}
 		});
 	}, []);
@@ -37,14 +37,23 @@ function App() {
 				{!user ? (
 					<Login />
 				) : (
-					<div className="app__body">
-						<Routes>
-							<Route exact path="/chats/view" element={<ChatView />} />
-							<Route exact path="/chats" element={<Chats />} />
-							<Route path="/preview" element={<Preview />} />
-							<Route exact path="/" element={<WebcamCapture />} />
-						</Routes>
-					</div>
+					<>
+						<img
+							className="app__logo"
+							src="https://upload.wikimedia.org/wikipedia/fr/a/ad/Logo-Snapchat.png"
+							alt=""
+						/>
+						<div className="app__body">
+							<div className="app__bodyBackground">
+								<Routes>
+									<Route exact path="/chats/view" element={<ChatView />} />
+									<Route exact path="/chats" element={<Chats />} />
+									<Route path="/preview" element={<Preview />} />
+									<Route exact path="/" element={<WebcamCapture />} />
+								</Routes>
+							</div>
+						</div>
+					</>
 				)}
 			</BrowserRouter>
 		</div>

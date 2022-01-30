@@ -2,7 +2,7 @@ import React from 'react';
 import './Chat.css';
 import { Avatar } from '@mui/material';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
-import ReactTimeago from 'react-timeago';
+import TimeAgo from 'react-timeago';
 import { selectImage } from '../features/appSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
 				<h4>{username}</h4>
 				<p>
 					{!read && 'Tap to view -'}{' '}
-					<ReactTimeago date={new Date(timestamp?.toDate()).toUTCString()} />
+					<TimeAgo date={new Date(timestamp?.toDate()).toUTCString()} />
 				</p>
 			</div>
 

@@ -34,6 +34,10 @@ function ChatView() {
 					colorsTime={[7, 5, 2, 0]}
 				>
 					{({ remainingTime }) => {
+						if (remainingTime === 0) {
+							exit();
+						}
+
 						return remainingTime;
 					}}
 				</CountdownCircleTimer>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCameraImage, resetCameraImage } from '../features/cameraSlice';
+import { selectUser } from '../features/appSlice';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
@@ -25,6 +26,7 @@ import './Preview.css';
 import { getDownloadURL } from 'firebase/storage';
 
 function Preview() {
+	const user = useSelector(selectUser);
 	const cameraImage = useSelector(selectCameraImage);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -54,9 +56,10 @@ function Preview() {
 			getDownloadURL(snapshot.ref).then((url) => {
 				addDoc(collectionRef, {
 					imageUrl: url,
-					username: 'Gwen',
+					username: user.displayName,
+					profilePic: '',
 					read: false,
-					// profilePic,
+					profilePic: user.profilePic,
 					timestamp: serverTimestamp(),
 				});
 				navigate('/chats');
